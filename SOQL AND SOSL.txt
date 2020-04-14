@@ -1,0 +1,33 @@
+
+	**** SOQL ****
+
+1. SELECT Name FROM Student WHERE LastName LIKE 'S%'.
+
+2. SELECT * FROM Students WHERE ClassName LIKE 'X%'.
+
+3. SELECT Student, ClassName FROM Students.
+
+4. SELECT * FROM STUDENTS WHERE ClassTeacher LIKE 'S%'.
+
+5. SELECT Name FROM Students WHERE YEAR(DOB) > 2000 
+
+6. SELECT * FROM Leads WHERE ModifiedDate = THIS_MONTH
+
+7. SELECT Class, (SELECT * FROM Students WHERE Name LIKE 'S%') FROM Students 
+
+8. SELECT * FROM Teachers WHERE Subject = 'HINDI' AND Subject = 'ENGLISH'
+
+9. SELECT * From Students WHERE Subject = 'HINDI' OR Subject = 'MATHS' 
+
+10. SELECT COUNT(Class) FROM Students GROUP BY Class.
+
+11. SELECT MONTH(DOB), COUNT(Student) FROM Students GROUP BY DOB OrderBy ASC
+
+
+
+
+   **** SOSL ****
+
+1. FIND {Joe} IN FIELDS RETURNING TEACHER, STUDENT.
+
+2. FIND {Joe} IN FIELDS RETURNING Teacher(Name Where Sex="male"),Student(Name Where Sex="male"). 
