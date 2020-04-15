@@ -3,19 +3,19 @@
 
 1. SELECT Name FROM Student WHERE LastName LIKE 'S%'.
 
-2. SELECT * FROM Students WHERE ClassName LIKE 'X%'.
+2. SELECT Name ,Id  FROM Students WHERE ClassName LIKE 'X%'.
 
 3. SELECT Student, ClassName FROM Students.
 
-4. SELECT * FROM STUDENTS WHERE ClassTeacher LIKE 'S%'.
+4. SELECT Name,ClassTeacher FROM STUDENTS WHERE ClassTeacher LIKE 'S%'.
 
 5. SELECT Name FROM Students WHERE YEAR(DOB) > 2000 
 
-6. SELECT * FROM Leads WHERE ModifiedDate = THIS_MONTH
+6. SELECT StudentName FROM Leads WHERE ModifiedDate = THIS_MONTH
 
 7. SELECT Class, (SELECT * FROM Students WHERE Name LIKE 'S%') FROM Students 
 
-8. SELECT * FROM Teachers WHERE Subject = 'HINDI' AND Subject = 'ENGLISH'
+8. SELECT Name,Id FROM Teachers WHERE Subject = 'HINDI' AND Subject = 'ENGLISH'
 
 9. SELECT * From Students WHERE Subject = 'HINDI' OR Subject = 'MATHS' 
 
