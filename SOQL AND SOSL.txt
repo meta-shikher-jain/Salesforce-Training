@@ -13,11 +13,11 @@
 
 6. SELECT StudentName FROM Leads WHERE ModifiedDate = THIS_MONTH
 
-7. SELECT Class, (SELECT * FROM Students WHERE Name LIKE 'S%') FROM Students 
+7. SELECT Class, (SELECT Name FROM Students WHERE Name LIKE 'S%') FROM Students 
 
 8. SELECT Name,Id FROM Teachers WHERE Subject = 'HINDI' AND Subject = 'ENGLISH'
 
-9. SELECT * From Students WHERE Subject = 'HINDI' OR Subject = 'MATHS' 
+9. SELECT Name , Subject From Students WHERE Subject = 'HINDI' OR Subject = 'MATHS' 
 
 10. SELECT COUNT(Class) FROM Students GROUP BY Class.
 
