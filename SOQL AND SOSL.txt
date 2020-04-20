@@ -1,27 +1,29 @@
 
 	**** SOQL ****
 
-1. SELECT Name FROM Student WHERE LastName LIKE 'S%'.
+1.SELECT FirstName__c, Name, DOB__c, Sex__c FROM Student__c where Name LIKE 'S%'
 
-2. SELECT Name ,Id  FROM Students WHERE ClassName LIKE 'X%'.
+2. SELECT FirstName__c, Name FROM Student__c where Class__r.Name LIKE 'X%'
 
-3. SELECT Student, ClassName FROM Students.
+3. SELECT FirstName__c, Name, Class__r.Name FROM Student__c
 
-4. SELECT Name,ClassTeacher FROM STUDENTS WHERE ClassTeacher LIKE 'S%'.
+4. SELECT Name, (SELECT FirstName__c, Name FROM Students__r) FROM Class__c
 
-5. SELECT Name FROM Students WHERE YEAR(DOB) > 2000 
+5. SELECT FirstName__c, Name FROM Student__c WHERE Class__r.ClassTeacher__r.LastName LIKE 'S%'
 
-6. SELECT StudentName FROM Leads WHERE ModifiedDate = THIS_MONTH
+6. SELECT FirstName__c, Name FROM Student__c WHERE CALENDAR_YEAR(DOB__c) > 2000
 
-7. SELECT Class, (SELECT Name FROM Students WHERE Name LIKE 'S%') FROM Students 
+7. SELECT Name FROM Lead WHERE LastModifiedDate = THIS_MONTH
 
-8. SELECT Name,Id FROM Teachers WHERE Subject = 'HINDI' AND Subject = 'ENGLISH'
+8. SELECT Name, (SELECT Name FROM Student__c WHERE Name LIKE 'S%') FROM Class__c 
 
-9. SELECT Name , Subject From Students WHERE Subject = 'HINDI' OR Subject = 'MATHS' 
+9. SELECT Name,Id FROM Teachers WHERE Subject = 'HINDI' AND Subject = 'ENGLISH'
 
-10. SELECT COUNT(Class) FROM Students GROUP BY Class.
+10. SELECT Name , Subject__c From Student__c WHERE Subject__c = 'HINDI' OR Subject__c = 'MATHS' 
 
-11. SELECT MONTH(DOB), COUNT(Student) FROM Students GROUP BY DOB OrderBy ASC
+11. SELECT COUNT(Class) FROM Students GROUP BY Class.
+
+12. SELECT CALENDAR_MONTH(DOB__c), COUNT(DOB__c) FROM Student__c GROUP BY CALENDAR_MONTH(DOB__c) ORDER BY COUNT(DOB__c)
 
 
 
