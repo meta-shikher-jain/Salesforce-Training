@@ -16,7 +16,7 @@ public class ApexAssignment1 {
     
     
     
-    public static Map<String,Set<Id>> studentInClass(){
+    public static Map<String,Set<Id>> StudentInClass(){
         
         List<Class__c> classData= [SELECT Name,(SELECT Id from Students__r) from Class__c];
         
