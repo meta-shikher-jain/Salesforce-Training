@@ -1,4 +1,4 @@
-ppublic class ListOfObjects {
+public class ListOfObjects {
   public static void getsobjects()
    {
       List<String> stdObjectNames = new List<String>();
