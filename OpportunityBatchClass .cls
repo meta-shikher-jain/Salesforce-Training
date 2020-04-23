@@ -1,6 +1,6 @@
-public class opportunityBatchClass {
+public class OpportunityBatchClass {
     
-    public static void checkBillToContact(List<Opportunity> opportunityList){
+    public static void CheckBillToContact(List<Opportunity> opportunityList){
         
         List<Opportunity> allOpportunity = [Select Name, Id,BillToContact__c FROM Opportunity 
                                             WHERE BillToContact__c != null AND Manager__c = null];
