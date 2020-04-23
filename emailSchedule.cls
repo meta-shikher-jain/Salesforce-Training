@@ -1,19 +1,22 @@
-global class emailSchedule implements Schedulable {
-	
-     public void execute (SchedulableContext ctx){
-       List<Opportunity> opptys = [SELECT Id, Name, Owner.Email,CloseDate FROM Opportunity
-           							WHERE LastModifiedDate < LAST_N_DAYS:10];
-	   
-       Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-       for(Opportunity oppty : opptys){
-          	System.debug('Name    :  '+oppty.Name+' Email : '+oppty.Owner.Email);
-           	String[] toAddresses = new String[] {oppty.Owner.Email};
-               
-           	mail.setToAddresses(toAddresses);
-			mail.setSubject('Subject!!');
-    		mail.setPlainTextBody('Hello String');
-			Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
-   		    break;
-      	}    
-	}
+global class SendEmailToOpptyOwner implements Database.Batchable<sObject>
+{
+  global Database.QueryLocator start(Database.BatchableContext BC)
+  {
+    return Database.getQueryLocator('Select Id, Name, Owner.Email, Owner.name from Opportunity where LastModifiedDate > LAST_N_DAYS:30');
+  }
+
+  global void execute(Database.BatchableContext BC, List<Opportunity > scope)
+  {
+	Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+	for(Opportunity opp : scope)
+    	{
+           String[] toAddresses = new String[] {opp.Owner.Email};
+	   mail.setToAddresses(toAddresses);
+           mail.setPlainTextBody('Test');
+	   mail.setSubject('Not Modified from 30 days');
+           Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
+    	}
+  }
+  global void finish(Database.BatchableContext BC){
+  }
 }
