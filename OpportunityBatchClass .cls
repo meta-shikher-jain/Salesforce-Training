@@ -1,15 +1,24 @@
 public class OpportunityBatchClass {
-    
-    public static void CheckBillToContact(List<Opportunity> opportunityList){
-        
-        List<Opportunity> allOpportunity = [Select Name, Id,BillToContact__c FROM Opportunity 
-                                            WHERE BillToContact__c != null AND Manager__c = null];
-      
-        List<Opportunity> managerUpdateList = new List<Opportunity>();
-        for(Opportunity opp : allOpportunity){
-            opp.Manager__c = opp.BillToContact__c;
-            managerUpdateList.add(opp);
-        }
-        update ManagerUpdateList;
-     }
+   
+    public static void updateManagerToAccountInOpp(List<Opportunity> listOpportunity){
+       Set<Id> opportunityIdSet = new Set<Id>();
+
+       for(Opportunity opp : listOpportunity){
+           if(opp.BillToContact__c != null && opp.Manager__c == null){
+               opportunityIdSet.add(opp.id);
+           }
+       }
+
+        if(opportunityIdSet.size() > 0){
+
+           List<Opportunity> listOpportunityToUpdate = [SELECT BillToContact__r.AccountId,Manager__c 
+                                                        FROM Opportunity WHERE id IN : opportunityIdSet];
+           
+           for(Opportunity objOpp : listOpportunityToUpdate){
+               objOpp.Manager__c = objOpp.BillToContact__r.AccountId;
+           }
+           update listOpportunityToUpdate;
+       }
+   }
+
 }
