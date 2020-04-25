@@ -1,24 +1,25 @@
-public class OpportunityBatchClass {
-   
-    public static void updateManagerToAccountInOpp(List<Opportunity> listOpportunity){
-       Set<Id> opportunityIdSet = new Set<Id>();
-
-       for(Opportunity opp : listOpportunity){
-           if(opp.BillToContact__c != null && opp.Manager__c == null){
-               opportunityIdSet.add(opp.id);
+public class OpportunityBatch {
+public static void checkBillToContact(List<Opportunity> opportunityList)
+   {
+       List<Opportunity> FilteredList = new List<Opportunity>();
+       for(Opportunity opp : opportunityList)
+       {
+           if(opp.BillToContact__c != null && opp.Manager__c == null)
+           {
+                   FilteredList.add(opp);
            }
        }
-
-        if(opportunityIdSet.size() > 0){
-
-           List<Opportunity> listOpportunityToUpdate = [SELECT BillToContact__r.AccountId,Manager__c 
-                                                        FROM Opportunity WHERE id IN : opportunityIdSet];
-           
-           for(Opportunity objOpp : listOpportunityToUpdate){
-               objOpp.Manager__c = objOpp.BillToContact__r.AccountId;
-           }
-           update listOpportunityToUpdate;
+       Map<Id, Opportunity> contactIdAndOpportunity_map = new map<Id,Opportunity>();
+       for(Opportunity opps : FilteredList)
+       {
+           contactIdAndOpportunity_map.put(opps.BillToContact__c,opps);
        }
+       List<Contact> contacts = [Select Id,AccountId from Contact where Id in :contactIdAndOpportunity_map.keySet()];
+       for(Contact cont : contacts)
+       {
+           Opportunity opp = contactIdAndOpportunity_map.get(cont.Id);
+           opp.Manager__c = cont.AccountId;
+       }
+       
    }
-
 }
