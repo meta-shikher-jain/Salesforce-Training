@@ -1,5 +1,5 @@
 public class ListOfObjects {
-  public static void getsobjects()
+  public static List<String> getsobjects()
    {
       List<String> stdObjectNames = new List<String>();
       for (Schema.SObjectType typ : Schema.getGlobalDescribe().values())
@@ -10,5 +10,6 @@ public class ListOfObjects {
                stdObjectNames.add(sobjName);
            }
       }
+    return stdObjectNames;
    }
 }
