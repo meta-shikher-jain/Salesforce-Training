@@ -16,23 +16,26 @@ public class ApexAssignment1 {
     
     
     
-    public static Map<String,Set<Id>> StudentInClass(){
-        
-        List<Class__c> classData= [SELECT Name,(SELECT Id from Students__r) from Class__c];
-        
-        Map<String,Set<Id>> students = new Map<String,Set<Id>>();
-        
-        for(Class__c temp: classData){
-            
-            Set<Id> StudentId = new Set<Id>();
-            for(Student__c student : temp.Students__r){
-                StudentId.add(student.Id);
-            }
-            students.put(temp.Name,StudentId);
-        }
-        return students;
-        
-    }
+    public static Map<Class__c,Set<Id>> StudentIdWithNames(){
+       
+           List<Class__c> classData= [SELECT Name,(SELECT Id from Students__r) from Class__c];
+           Map<Class__c,Set<Id>> students = new Map<Class__c,Set<Id>>();
+           List<Student__c> stdIds = [select Id,Class_object__r.Id from Student__c];
+           for(Class__c c: classData)
+           {
+                  Set<Id> sIds = new Set<Id>();
+                  for(Student__c s: stdIds)
+                  {
+                      if(s.Class_object__r.Id == c.Id)
+                      {
+                  			sIds.add(s.Id);
+              			}
+          			}
+          students.put(c, sIds);
+      		}
+    	return students;
+  }
+       
     
     public static Integer NoOfWorkingDates(Date StartDate,Date EndDate){
        Integer workingDays=0;
