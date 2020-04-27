@@ -1,6 +1,6 @@
 public class ContactStore
 {
-   public static void storeContact(Id contactId)
+   public static void StoreContact(Id contactId)
    {
        Contact contact = [ SELECT accountid from Contact where id = :contactId ];
        Account contactIdsOfAccount = [SELECT Id,ContactID__c FROM account where Id = :contact.AccountId];
