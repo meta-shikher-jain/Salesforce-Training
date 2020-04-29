@@ -1,28 +1,12 @@
-trigger UpdateMyCount on Student__c (before insert,before update) {
+trigger updateMyCount on Student__c (before insert,before update) {
 
-    set<Id> classIds = new set<Id>();
-    for(Student__c student: trigger.new){
-        classIds.add(student.class_object__c);
-    }
-        
-       List<Class__c> classList = [select NoOfStudents__c, MyCount__c,MaxSize__c from Class__c where Id IN :classIds];
-        
-       Map<Id,Class__c> classMap = new Map<Id,Class__c>();
-       
-        for(Class__c cls : classList){
-            if(!classMap.containsKey(cls.Id))
-                classMap.put(cls.Id,cls);
+    	Set<Id> studClassId = new Set<Id>();
+        for(Student__c stud : trigger.new){
+            studClassId.add(stud.Class_object__c);
         }
-        for(Student__c std : trigger.new){
-            System.debug('My count '+classMap.get(std.class_object__c).MyCount__c);
-            system.debug('max size' +classMap.get(std.class_object__c).MaxSize__c);
-            if(classMap.get(std.class_object__c).MyCount__c < classMap.get(std.class_object__c).MaxSize__c){
-                 classMap.get(std.Class_object__c).MyCount__c++;
-            }
-            else{
-                std.addError('Cannot insert Record - fjs is full');
-            }
-            
-            update classMap.values();
-                
+        List<Class__c> classDataList = [SELECT MyCount__c,(SELECT Id FROM Students__r) FROM Class__c WHERE Id IN : studClassId];
+        for(Class__c classRecord : classDataList){
+            classRecord.MyCount__c = classRecord.Students__r.size();
         }
+        update classDataList;
+}
