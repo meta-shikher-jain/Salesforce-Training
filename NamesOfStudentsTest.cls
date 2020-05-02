@@ -16,7 +16,7 @@ public class NamesOfStudentsTest {
         insert studentList;
         
         Test.startTest();
-        List<String> studentsList = ApexAssignment1.NameOfStudents(c.id);
+        List<String> studentsList = UtilityClassOfVariousFunctions.NameOfStudents(c.id);
         System.assertEquals(10,studentsList.size());
         test.stopTest();
     }
