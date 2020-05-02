@@ -1,8 +1,8 @@
-public class ApexAssignment1 {
+public class UtilityClassOfVariousFunctions {
 
     public static List<String> NameOfStudents(Id classId){
         
-        List<Student__c> all_students = [ SELECT First_Name__c From Student__c WHERE Class_object__c =: classId ];
+        List<Student__c> all_students = [ SELECT First_Name__c FROM Student__c WHERE Class_object__c =: classId ];
         
         List<String> NameOfStudents = new List<String>();
         
@@ -18,21 +18,21 @@ public class ApexAssignment1 {
     
     public static Map<Class__c,Set<Id>> StudentIdWithNames(){
        
-           List<Class__c> classData= [SELECT Name,(SELECT Id from Students__r) from Class__c];
+           List<Class__c> classData= [SELECT Name,(SELECT Id from Students__r) FROM Class__c];
            Map<Class__c,Set<Id>> students = new Map<Class__c,Set<Id>>();
-           List<Student__c> stdIds = [select Id,Class_object__r.Id from Student__c];
-           for(Class__c c: classData)
+           List<Student__c> stdIds = [SELECT Id,Class_object__r.Id FROM Student__c];
+           for(Class__c cls: classData)
            {
                   Set<Id> sIds = new Set<Id>();
-                  for(Student__c s: stdIds)
+                  for(Student__c student: stdIds)
                   {
-                      if(s.Class_object__r.Id == c.Id)
+                      if(student.Class_object__r.Id == cls.Id)
                       {
-                  			sIds.add(s.Id);
-              			}
-          			}
-          students.put(c, sIds);
-      		}
+                  		sIds.add(student.Id);
+              		}
+          }
+          students.put(cls, sIds);
+      }
     	return students;
   }
        
