@@ -31,7 +31,7 @@ public class MapClassAndStudentsTest {
            }		
            expected.put(cls,studentIds);
        }
-       Map<Class__c,Set<Id>> result = ApexAssignment1.StudentIdWithNames();
+       Map<Class__c,Set<Id>> result = UtilityClassOfVariousFunctions.StudentIdWithNames();
        System.assertEquals(result.keyset().size(),2);
          
    }
