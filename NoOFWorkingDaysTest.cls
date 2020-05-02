@@ -6,7 +6,7 @@ public class NoOFWorkingDaysTest {
      test.startTest();
      Date startDate = Date.newInstance(2020, 04, 20);
      Date endDate = Date.newInstance(2020, 04, 25);
-     integer noOfWorkingDays = ApexAssignment1.NoOfWorkingDates(startDate,endDate);
+     integer noOfWorkingDays = UtilityClassOfVariousFunctions.NoOfWorkingDates(startDate,endDate);
      System.assertEquals(4,noOfWorkingDays);
      test.stopTest();
     }
@@ -15,7 +15,7 @@ public class NoOFWorkingDaysTest {
         test.startTest();
         Date startDate = Date.newInstance(2020, 04, 17);
      	Date endDate = Date.newInstance(2020, 04, 24);
-     	integer noOfWorkingDays = ApexAssignment1.NoOfWorkingDates(startDate,endDate);
+     	integer noOfWorkingDays = UtilityClassOfVariousFunctions.NoOfWorkingDates(startDate,endDate);
     	System.assertEquals(4,noOfWorkingDays);
     	test.stopTest();
     }
@@ -24,7 +24,7 @@ public class NoOFWorkingDaysTest {
         test.startTest();
         Date startDate = Date.newInstance(2020, 04, 17);
      	Date endDate = Date.newInstance(2020, 04,17);
-     	integer noOfWorkingDays = ApexAssignment1.NoOfWorkingDates(startDate,endDate);
+     	integer noOfWorkingDays = UtilityClassOfVariousFunctions.NoOfWorkingDates(startDate,endDate);
     	System.assertEquals(0,noOfWorkingDays);
     	test.stopTest();
     }
