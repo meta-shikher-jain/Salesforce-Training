@@ -1,13 +1,11 @@
-public class ContactStore
+public class AccountRelatedContactStore
 {
    public static void StoreContact(Id contactId)
    {
-       Contact contact = [ SELECT accountid from Contact where id = :contactId ];
-       Account contactIdsOfAccount = [SELECT Id,ContactID__c FROM account where Id = :contact.AccountId];
-       
+       Account contactIdsOfAccount = [SELECT Id,ContactID__c FROM Account WHERE Id IN (SELECT AccountId FROM Contact where Id = :contactId)];
        if(contactIdsOfAccount.ContactID__c == null)
        {
-           List<Contact> contactIdList = [ SELECT id from contact where accountid = :contactIdsofAccount.id ];
+           List<Contact> contactIdList = [ SELECT Id from contact where accountid = :contactIdsofAccount.id ];
            String contactIdsEntry = '';
            for(Contact contactObject: contactIdList)
            {
