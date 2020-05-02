@@ -5,7 +5,7 @@ public class AccountRelatedContactStore
        Account contactIdsOfAccount = [SELECT Id,ContactID__c FROM Account WHERE Id IN (SELECT AccountId FROM Contact where Id = :contactId)];
        if(contactIdsOfAccount.ContactID__c == null)
        {
-           List<Contact> contactIdList = [ SELECT Id from contact where accountid = :contactIdsofAccount.id ];
+           List<Contact> contactIdList = [ SELECT Id FROM Contact WHERE Accountid = :contactIdsofAccount.Id ];
            String contactIdsEntry = '';
            for(Contact contactObject: contactIdList)
            {
