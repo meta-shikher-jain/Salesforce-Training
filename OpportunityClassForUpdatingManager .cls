@@ -1,4 +1,4 @@
-public class OpportunityBatch {
+public class OpportunityClassForUpdatingManager {
 public static void checkBillToContact(List<Opportunity> opportunityList)
    {
        List<Opportunity> FilteredList = new List<Opportunity>();
@@ -14,7 +14,7 @@ public static void checkBillToContact(List<Opportunity> opportunityList)
        {
            contactIdAndOpportunity_map.put(opps.BillToContact__c,opps);
        }
-       List<Contact> contacts = [Select Id,AccountId from Contact where Id in :contactIdAndOpportunity_map.keySet()];
+       List<Contact> contacts = [SELECT Id,AccountId FROM Contact where Id IN :contactIdAndOpportunity_map.keySet()];
        for(Contact cont : contacts)
        {
            Opportunity opp = contactIdAndOpportunity_map.get(cont.Id);
