@@ -21,7 +21,7 @@ public class NotAllowToDeleteClassTest {
             Database.delete(c);
         }
         catch(DmlException ex){
-            System.assertEquals('Cannot delete class as it has more than 2 female students', ex.getDmlMessage(0));
+            System.assertEquals('Cannot delete class as it has more than one female students', ex.getDmlMessage(0));
 
         }
     }
