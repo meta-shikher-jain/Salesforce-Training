@@ -7,11 +7,8 @@ public class NotAllowedClass {
         for(AggregateResult ar : stList){
             classIds.add((Id)ar.get('Class_object__c'));
         }
-        
-        for(Id i:classIds){
-            
+        for(Id i:classIds){   
            oldMap.get(i).addError('Cannot delete class as it has more than 2 female students');
-       	}
-        
+        }
     }
 }
