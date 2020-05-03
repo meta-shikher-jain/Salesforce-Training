@@ -16,11 +16,7 @@ trigger LoanUpdateTrigger on Loan__c (before insert) {
                  obj.Manager__c = managerCity.Manager__c;
            }
       } catch (Exception e) {
-          for(Loan__c  obj : trigger.new)
-          {
-             if(obj.City__c != null)
-                 obj.Manager__c = 'Shikher Jain';
-          }
+          
       }
   }
 }
