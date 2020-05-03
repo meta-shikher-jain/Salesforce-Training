@@ -38,7 +38,7 @@ public class Utility{
        try{
             if(StartDate == null || EndDate == null){
                 NullPointerException e = new NullPointerException();
-                e.setMessage('This is a constructed exception!');
+                e.setMessage('StartDate or EndDate cant be Null');
                 throw e;    
             }
                
