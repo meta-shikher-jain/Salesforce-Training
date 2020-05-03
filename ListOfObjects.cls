@@ -5,10 +5,7 @@ public class sObjectListInOrg {
       for (Schema.SObjectType typ : Schema.getGlobalDescribe().values())
        {
          String sobjName = String.valueOf(typ);
-           if (!sobjName.contains('__c') )
-           {
-               stdObjectNames.add(sobjName);
-           }
+         stdObjectNames.add(sobjName);
       }
     return stdObjectNames;
    }
