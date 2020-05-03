@@ -10,16 +10,22 @@ global class SendEmailToOpptyOwner implements Database.Batchable<sObject>
 	Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
 	for(Opportunity opp : listOfOpportunity)
     	{  
-	   if(opp.Owner.Email == null){
-	    	System.addError('Owners Email Does not Exist ');
-	   }	
-	   else{
+		try{
+            		if(opp.Owner.Email == null ){
+                		NullPointerException e = new NullPointerException();
+                		e.setMessage('Email Cant be null');
+                		throw e;    
+            		}
+                }
+		catch (Exception e) {   
+      		}
+	  
 	   	String[] toAddresses = new String[] {opp.Owner.Email};
 	 	mail.setToAddresses(toAddresses);
           	mail.setPlainTextBody('Test');
 	   	mail.setSubject('Not Modified from 30 days');
            	Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });	
-	   }
+	  
     	}
   }
   global void finish(Database.BatchableContext BC){
