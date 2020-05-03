@@ -1,4 +1,4 @@
-public class UtilityClassOfVariousFunctions {
+public class Utility{
 
     public static List<String> getStudentNameListByClassId(Id classId){
         
@@ -24,37 +24,43 @@ public class UtilityClassOfVariousFunctions {
                   {
                       if(student.Class_object__r.Id == cls.Id)
                       {
-                  		sIds.add(student.Id);
-              		}
+                        sIds.add(student.Id);
+                    }
           }
           students.put(cls, sIds);
       }
-    	return students;
+        return students;
   }
        
     
     public static Integer NoOfWorkingDates(Date StartDate,Date EndDate){
        Integer workingDays=0;
+       try{
+            if(StartDate == null || EndDate == null){
+                NullPointerException e = new NullPointerException();
+                e.setMessage('This is a constructed exception!');
+                throw e;    
+            }
+               
+       }catch (Exception e) {   
+       }
        Integer totalDaysBetweenDates = StartDate.daysBetween(EndDate)-1;
        Integer noOfWeeks = totalDaysBetweenDates/7;
-       
-        If(Math.mod(totalDaysBetweenDates,7)==0){
-            workingDays=noOfWeeks*5;
-        }
-        
+       If(Math.mod(totalDaysBetweenDates,7)==0){
+           workingDays=noOfWeeks*5;
+       }
         else{
               workingDays=noOfWeeks*5;
-	      Integer remainingDays = Math.mod(totalDaysBetweenDates,7);
+              Integer remainingDays = Math.mod(totalDaysBetweenDates,7);
               for(Integer itr=1; itr<=remainingDays; itr++){
-              Date todayDate = StartDate + itr;
-              DateTime currD =DateTime.newInstance(todayDate.year(), todayDate.month(),todayDate.day());
-              String TodayDay = currD.format('EEEE');
-              if(TodayDay !='Saturday' && TodayDay != 'Sunday'){
-                  workingDays++;
+                  Date todayDate = StartDate + itr;
+                  DateTime currD =DateTime.newInstance(todayDate.year(), todayDate.month(),todayDate.day());
+                  String TodayDay = currD.format('EEEE');
+                  if(TodayDay !='Saturday' && TodayDay != 'Sunday'){
+                      workingDays++;
+                  }
               }
-          }
         }
         return workingDays;
     }
 }
-
