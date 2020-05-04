@@ -7,7 +7,7 @@
         
         update opp;
         Opportunity updatedOpp = [SELECT CloseDate FROM Opportunity];
-		System.assertEquals(updatedOpp.CloseDate,System.today());
+	System.assertEquals(updatedOpp.CloseDate,System.today());
     }
     
     @Istest static void testStageChangedToCloseLost(){
@@ -17,7 +17,7 @@
         
         update opp;
         Opportunity updatedOpp = [SELECT CloseDate FROM Opportunity];
-		System.assertEquals(updatedOpp.CloseDate,System.today());
+	System.assertEquals(updatedOpp.CloseDate,System.today());
     }
     
     @Istest static void testFromClosedLostToClosedLost(){
@@ -27,6 +27,6 @@
         
         update opp;
         Opportunity updatedOpp = [SELECT CloseDate FROM Opportunity];
-		System.assertEquals(updatedOpp.CloseDate,System.today().addMonths(1));
+	System.assertEquals(updatedOpp.CloseDate,System.today().addMonths(1));
     }
 }
