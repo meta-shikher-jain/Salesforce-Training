@@ -1,6 +1,7 @@
 @IsTest
 public class StudentTriggerTest {
-    @IsTest static void PositivetestStudentNotAllowedIfLimitExceed(){
+    @IsTest 
+    static void PositivetestStudentNotAllowedIfLimitExceed(){
         Class__c classRecord = new Class__c(Board__c = 'Bihar',Fee__c = 1000, MaxSize__c = 3);
         insert classRecord;
         List<Student__c> studentList = new List<Student__c>();
@@ -10,6 +11,7 @@ public class StudentTriggerTest {
         }
         try{
             insert studentList;
+            
         }
         catch(DmlException ex){
             System.assertEquals(StatusCode.FIELD_CUSTOM_VALIDATION_EXCEPTION,ex.getDmlType(0));
@@ -31,10 +33,10 @@ public class StudentTriggerTest {
 
    
     @IsTest static void InserttestupdateMyCountOnClassOnStudentAddition(){
-        Class__c classRecord = new Class__c(Board__c = 'Bihar',Fee__c = 1000, MaxSize__c = 5);
+        Class__c classRecord = new Class__c(Board__c = 'Bihar',Fee__c = 1000, MaxSize__c = 10);
         insert classRecord;
         List<Student__c> studentList = new List<Student__c>();
-        for(Integer i = 0; i < 4; i++){
+        for(Integer i = 0; i <4; i++){
             Student__c studentData = new Student__c(First_Name__c = 'Test Name '+ i, LastName__c = 'LastName' + i, Sex__c = 'Female',Class_object__c = classRecord.Id);
             studentList.add(studentData);
         }
@@ -52,14 +54,13 @@ public class StudentTriggerTest {
             studentList.add(studentData);
         }
         insert studentList;
-        Class__c outputClassDataOnInsert = [SELECT MyCount__c From Class__c WHERE Id = : classRecord.Id];
         delete studentList[0];
         Class__c outputClassDataOnDelete = [SELECT MyCount__c From Class__c WHERE Id = : classRecord.Id];
         System.assertEquals(3, outputClassDataOnDelete.MyCount__c);
     }
     
     @IsTest static void UndeletetestupdateMyCountOnClassOnStudentAddition(){
-        Class__c classRecord = new Class__c(Board__c = 'Bihar',Fee__c = 1000, MaxSize__c = 5);
+        Class__c classRecord = new Class__c(Board__c = 'Bihar',Fee__c = 1000, MaxSize__c = 5, MyCount__c = 1);
         insert classRecord;
         List<Student__c> studentList = new List<Student__c>();
         for(Integer i = 0; i < 4; i++){
@@ -67,9 +68,7 @@ public class StudentTriggerTest {
             studentList.add(studentData);
         }
         insert studentList;
-        Class__c outputClassDataOnInsert = [SELECT MyCount__c From Class__c WHERE Id = : classRecord.Id];
         delete studentList[0];
-        Class__c outputClassDataOnDelete = [SELECT MyCount__c From Class__c WHERE Id = : classRecord.Id];
         undelete studentList[0];
         Class__c outputClassDataOnUndelete = [SELECT MyCount__c From Class__c WHERE Id = : classRecord.Id];
         System.assertEquals(4, outputClassDataOnUndelete.MyCount__c);
