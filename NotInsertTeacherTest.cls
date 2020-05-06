@@ -24,7 +24,8 @@ public class TeachTriggerTest {
         insert classRecord;
         Teach__c teachRecord = new Teach__c(Class__c = classRecord.Id, Teacher__c = con.Id,Subjects__c = 'English');
         insert teachRecord; 
-        System.assertEquals(1, [SELECT Count() FROM Teach__c]);
+        Integer noOfTeacher = [SELECT Count() FROM Teach__c]
+        System.assertEquals(1, noOfTeacher);
         teachRecord.Subjects__c = 'Hindi';
         try {
             update teachRecord;
