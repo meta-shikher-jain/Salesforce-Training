@@ -1,0 +1,15 @@
+<apex:page standardController="Student__c" renderAs="Pdf">
+    <apex:form >
+    	<apex:pageBlock title="Student Details">
+        	<apex:pageBlockSection >
+            	<apex:outputText value="{!Student__c.Name}"></apex:outputText>
+            	<apex:outputText value="{!Student__c.First_Name__c}"></apex:outputText>
+            	<apex:outputText value="{!Student__c.LastName__c}"></apex:outputText>
+            	<apex:outputText value="{!Student__c.Sex__c}"></apex:outputText>
+            	<apex:outputText value="{!Student__c.DOB__c}"></apex:outputText>
+            	<apex:outputText value="{!Student__c.Email__c}"></apex:outputText>
+               	<apex:outputText value="{!Student__c.Class_object__r.Name}"></apex:outputText>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

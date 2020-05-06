@@ -1,0 +1,52 @@
+<apex:page controller="AccountSearchControllers" >
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Search Account</title>
+        <!-- Import the Design System style sheet -->
+        <apex:slds />
+    </head>
+    <body>
+        <apex:form >
+            <apex:pageblock >
+                <apex:pageBlockButtons location="top">
+                    <apex:commandButton value="Search" action="{!SearchAccountRec}"/>
+                </apex:pageBlockButtons>
+                <apex:pageBlockSection >
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="BillingCity" />
+                        <apex:inputText value="{!BillingCity}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Number of Accounts To show" />
+                        <apex:inputText value="{!numOfRecords}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="BillingState" />
+                        <apex:inputText value="{!BillingState}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="BillingCountry" />
+                        <apex:inputText value="{!BillingCountry}" />
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+                <apex:pageBlock rendered="{!If(accounts.size > 0,true,false)}" title="Search Results">
+                    <apex:pageBlockTable value="{!Accounts}" var="item" id="showData">
+                        <apex:column value="{!item.Id}"/>
+                        <apex:column value="{!item.BillingCity}"/>
+                        <apex:column value="{!item.BillingState}"/>
+                        <apex:column value="{!item.BillingCountry}"/>
+                    </apex:pageBlockTable>
+                </apex:pageBlock>
+                <apex:pageBlock rendered="{!If(accounts.size==0 && isResultDisplay == true,true,false)}" title="Search Result">            
+                    <apex:outputLabel value="No Result Found"></apex:outputLabel>           
+                </apex:pageBlock>
+                <apex:outputText >Page {!(setCon.pageNumber)} of {! CEILING(ResultSize / setCon.pageSize) }</apex:outputText>
+                <apex:commandButton rendered="{!setCon.hasPrevious}" value="first" action="{!setCon.first}"/>
+                <apex:commandButton rendered="{!setCon.hasPrevious}" value="Previous" action="{!setCon.previous}"/>
+                <apex:commandButton rendered="{!setCon.hasNext}" value="next" action="{!setCon.next}"/>
+                <apex:commandButton rendered="{!setCon.hasNext}" value="last" action="{!setCon.last}"/>
+            </apex:pageblock>
+        </apex:form>
+    </body>
+</apex:page>

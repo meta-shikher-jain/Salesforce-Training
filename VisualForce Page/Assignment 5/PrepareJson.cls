@@ -1,0 +1,3 @@
+<apex:page controller="JSONGenerator" showHeader="false" contentType="application">
+    {!jsonStr}
+</apex:page>

@@ -1,0 +1,28 @@
+<apex:page Controller="ContactsRelatedWithManagerController">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Contacts Related With Manager</title>
+        <!-- Import the Design System style sheet -->
+        <apex:slds />
+    </head>
+    <body>
+        <apex:form >
+            <apex:pageBlock rendered="{!If(RelatedContacts.size > 0,true,false)}" title="Contacts Related To Bill to Contact Account Id">
+                <apex:pageBlockSection >
+                    <apex:selectRadio value="{!contactRecord}">
+                        <apex:selectOptions value="{!RelatedContacts}" ></apex:selectOptions>
+                    </apex:selectRadio>
+                </apex:pageBlockSection>
+                <div style="text-align: center">
+                    <apex:commandButton value="Save" action="{! Save}" />
+                    <apex:commandButton value="Clear" action="{! Clear}" />
+                    <apex:commandButton value="Cancel" action="{! Cancel}" />
+                </div>
+            </apex:pageBlock>
+            <apex:pageBlock rendered="{!If(RelatedContacts.size == 0,true,false)}" title="Contacts Related To Bill to Contact Account Id">
+                <apex:outputLabel value="No Result Found"></apex:outputLabel>
+            </apex:pageBlock>
+        </apex:form>
+    </body>
+</apex:page>
