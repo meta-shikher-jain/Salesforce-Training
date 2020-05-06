@@ -2,7 +2,7 @@
 public class MapClassAndStudentsTest {
 
     @isTest
-   	static void testToMapClassIdwithStudent() {
+   	static void testTClassIdwithStudent_Id_StudentName() {
        
        Map<Class__c, Set<Id>> expected = new Map<Class__c, Set<Id>>();
        List<Class__c> classList = new List<Class__c>();
