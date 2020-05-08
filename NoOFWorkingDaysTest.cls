@@ -7,7 +7,7 @@ public class NoOFWorkingDaysTest {
      Date endDate = Date.newInstance(2020, 04, 25);
      Integer noOfWorkingDays = Utility.NoOfWorkingDates(startDate,endDate);
      System.assertEquals(4,noOfWorkingDays);
-    	Test.StopTest();
+     Test.StopTest();
     }
     
     @IsTest public static void testDaysWithWeekends(){
@@ -15,8 +15,8 @@ public class NoOFWorkingDaysTest {
         Date startDate = Date.newInstance(2020, 04, 17);
         Date endDate = Date.newInstance(2020, 04, 24);
         Integer noOfWorkingDays = Utility.NoOfWorkingDates(startDate,endDate);
-    	   System.assertEquals(4,noOfWorkingDays);
-    	   Test.StopTest();
+    	System.assertEquals(4,noOfWorkingDays);
+    	Test.StopTest();
     }
     
     @IsTest public static void testWithSameStartAndEndDate(){
@@ -24,8 +24,8 @@ public class NoOFWorkingDaysTest {
         Date startDate = Date.newInstance(2020, 04, 17);
         Date endDate = Date.newInstance(2020, 04,17);
         Integer noOfWorkingDays = Utility.NoOfWorkingDates(startDate,endDate);
-    	   System.assertEquals(0,noOfWorkingDays);
-    	   Test.StopTest();
+    	System.assertEquals(0,noOfWorkingDays);
+    	Test.StopTest();
     } 
     
     @IsTest public static void testWithNullStartAndEndDate(){
