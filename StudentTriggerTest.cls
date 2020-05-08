@@ -1,16 +1,18 @@
 @IsTest
 public class StudentTriggerTest {
     @IsTest 
-    static void PositivetestStudentNotAllowedIfLimitExceed(){
+    static void testStudentNotAllowedIfLimitExceed(){
         Class__c classRecord = new Class__c(Board__c = 'Bihar',Fee__c = 1000, MaxSize__c = 3);
         insert classRecord;
         List<Student__c> studentList = new List<Student__c>();
         for(Integer i = 0; i < 4; i++){
-            Student__c studentData = new Student__c(First_Name__c = 'Test Name '+ i, LastName__c = 'LastName' + i, Sex__c = 'Female',Class_object__c = classRecord.Id);
+            Student__c studentData = new Student__c(First_Name__c = 'Test Name '+ i, LastName__c = 'LastName' + i, 
+                                                    Sex__c = 'Female',Class_object__c = classRecord.Id);
             studentList.add(studentData);
         }
         try{
             insert studentList;
+            System.assert(true,'A error Found');
             
         }
         catch(DmlException ex){
@@ -19,12 +21,14 @@ public class StudentTriggerTest {
         }
     }
 
-    @IsTest static void NegativetestStudentNotAllowedIfLimitExceed(){
+    @IsTest 
+    static void testStudentAllowedIfLimitNOTExceed(){
         Class__c classRecord = new Class__c(Board__c = 'Bihar',Fee__c = 1000, MaxSize__c = 5);
         insert classRecord;
         List<Student__c> studentList = new List<Student__c>();
         for(Integer i = 0; i < 4; i++){
-            Student__c studentData = new Student__c(First_Name__c = 'Test Name '+ i, LastName__c = 'LastName' + i, Sex__c = 'Female',Class_object__c = classRecord.Id);
+            Student__c studentData = new Student__c(First_Name__c = 'Test Name '+ i, LastName__c = 'LastName' + i, 
+                                                    Sex__c = 'Female',Class_object__c = classRecord.Id);
             studentList.add(studentData);
         }
         insert studentList;
@@ -32,12 +36,14 @@ public class StudentTriggerTest {
     }
 
    
-    @IsTest static void InserttestupdateMyCountOnClassOnStudentAddition(){
+    @IsTest 
+    static void testupdateMyCountOnClassOnStudentInsertion(){
         Class__c classRecord = new Class__c(Board__c = 'Bihar',Fee__c = 1000, MaxSize__c = 10);
         insert classRecord;
         List<Student__c> studentList = new List<Student__c>();
         for(Integer i = 0; i <4; i++){
-            Student__c studentData = new Student__c(First_Name__c = 'Test Name '+ i, LastName__c = 'LastName' + i, Sex__c = 'Female',Class_object__c = classRecord.Id);
+            Student__c studentData = new Student__c(First_Name__c = 'Test Name '+ i, LastName__c = 'LastName' + i, 
+                                                    Sex__c = 'Female',Class_object__c = classRecord.Id);
             studentList.add(studentData);
         }
         insert studentList;
@@ -45,12 +51,14 @@ public class StudentTriggerTest {
         System.assertEquals(4, outputClassDataOnInsert.MyCount__c);
     }
    
-    @IsTest static void DeletetestupdateMyCountOnClassOnStudentAddition(){
+    @IsTest 
+    static void testupdateMyCountOnClassOnStudentAdditionAndDeletion(){
         Class__c classRecord = new Class__c(Board__c = 'Bihar',Fee__c = 1000, MaxSize__c = 5);
         insert classRecord;
         List<Student__c> studentList = new List<Student__c>();
         for(Integer i = 0; i < 4; i++){
-            Student__c studentData = new Student__c(First_Name__c = 'Test Name '+ i, LastName__c = 'LastName' + i, Sex__c = 'Female',Class_object__c = classRecord.Id);
+            Student__c studentData = new Student__c(First_Name__c = 'Test Name '+ i, LastName__c = 'LastName' + i, 
+                                                    Sex__c = 'Female',Class_object__c = classRecord.Id);
             studentList.add(studentData);
         }
         insert studentList;
@@ -59,12 +67,14 @@ public class StudentTriggerTest {
         System.assertEquals(3, outputClassDataOnDelete.MyCount__c);
     }
     
-    @IsTest static void UndeletetestupdateMyCountOnClassOnStudentAddition(){
+    @IsTest 
+    static void UndeletetestupdateMyCountOnClassOnStudentAddition(){
         Class__c classRecord = new Class__c(Board__c = 'Bihar',Fee__c = 1000, MaxSize__c = 5, MyCount__c = 1);
         insert classRecord;
         List<Student__c> studentList = new List<Student__c>();
         for(Integer i = 0; i < 4; i++){
-            Student__c studentData = new Student__c(First_Name__c = 'Test Name '+ i, LastName__c = 'LastName' + i, Sex__c = 'Female',Class_object__c = classRecord.Id);
+            Student__c studentData = new Student__c(First_Name__c = 'Test Name '+ i, LastName__c = 'LastName' + i, 
+                                                    Sex__c = 'Female',Class_object__c = classRecord.Id);
             studentList.add(studentData);
         }
         insert studentList;
