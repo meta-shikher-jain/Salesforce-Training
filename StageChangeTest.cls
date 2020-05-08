@@ -7,7 +7,7 @@
         opp.StageName = 'Closed Won';
         update opp;
         Opportunity updatedOpp = [SELECT CloseDate FROM Opportunity];
-		System.assertEquals(updatedOpp.CloseDate,System.today());
+	System.assertEquals(updatedOpp.CloseDate,System.today());
     }
     
     @IsTest 
