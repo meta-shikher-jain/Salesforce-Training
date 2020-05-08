@@ -1,4 +1,4 @@
-@istest
+@IsTest
 public class MapClassAndStudentsTest {
 
     @isTest
