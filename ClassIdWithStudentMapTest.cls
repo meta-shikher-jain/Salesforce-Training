@@ -1,8 +1,8 @@
 @IsTest
-public class MapClassAndStudentsTest {
+public class ClassIdWithStudentMapTest {
 
     @isTest
-   	static void testTClassIdwithStudent_Id_StudentName() {
+   	static void testClassIdinMapWithStudent() {
        
        Map<Class__c, Set<Id>> expected = new Map<Class__c, Set<Id>>();
        List<Class__c> classList = new List<Class__c>();
