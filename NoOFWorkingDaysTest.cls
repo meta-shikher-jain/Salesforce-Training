@@ -15,7 +15,7 @@ public class NoOFWorkingDaysTest {
         Date startDate = Date.newInstance(2020, 04, 17);
         Date endDate = Date.newInstance(2020, 04, 24);
         Integer noOfWorkingDays = Utility.NoOfWorkingDates(startDate,endDate);
-    	System.assertEquals(4,noOfWorkingDays);
+        System.assertEquals(4,noOfWorkingDays);
     	Test.StopTest();
     }
     
@@ -24,7 +24,7 @@ public class NoOFWorkingDaysTest {
         Date startDate = Date.newInstance(2020, 04, 17);
         Date endDate = Date.newInstance(2020, 04,17);
         Integer noOfWorkingDays = Utility.NoOfWorkingDates(startDate,endDate);
-    	System.assertEquals(0,noOfWorkingDays);
+        System.assertEquals(0,noOfWorkingDays);
     	Test.StopTest();
     } 
     
@@ -38,6 +38,6 @@ public class NoOFWorkingDaysTest {
         }catch(Exception e){
             System.assertEquals(e.getMessage(),'Attempt to de-reference a null object');
         }
-    	   Test.StopTest();
+    	Test.StopTest();
     } 
 }
