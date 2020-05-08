@@ -1,6 +1,6 @@
 @IsTest public class StageChangeTest {
 
-    @Istest 
+    @IsTest 
     static void testStageChangedToCloseWon(){
         Opportunity opp = new Opportunity(Name='Opportunity Test',StageName='Prospecting',CloseDate=System.today().addMonths(1));
         insert opp;
@@ -10,7 +10,7 @@
 		System.assertEquals(updatedOpp.CloseDate,System.today());
     }
     
-    @Istest 
+    @IsTest 
     static void testStageChangedToCloseLost(){
         Opportunity opp = new Opportunity(Name='Opportunity Test',StageName='Prospecting',CloseDate=System.today().addMonths(1));
         insert opp;
@@ -20,7 +20,7 @@
 	System.assertEquals(updatedOpp.CloseDate,System.today());
     }
     
-    @Istest 
+    @IsTest 
     static void testFromClosedLostToClosedLost(){
         Opportunity opp = new Opportunity(Name='Opportunity Test',StageName='Closed Lost',CloseDate=System.today().addMonths(1));
         insert opp;
