@@ -6,7 +6,8 @@
         insert classRecord;
       	List<Student__c> studentList = new List<Student__c>();
         for(Integer i = 0; i < 4; i++){
-            Student__c studentData = new Student__c(First_Name__c = 'Test Name '+ i, LastName__c = 'LastName' + i, Sex__c = 'Male',Class_object__c = classRecord.Id);
+            Student__c studentData = new Student__c(First_Name__c = 'Test Name '+ i, LastName__c = 'LastName' + i, 
+                                                    Sex__c = 'Male',Class_object__c = classRecord.Id);
             studentList.add(studentData);
         }
         insert studentList;
@@ -25,7 +26,8 @@
         insert classRecord;
         List<Student__c> studentList = new List<Student__c>();
         for(Integer i = 0; i < 4; i++){
-            Student__c studentData = new Student__c(First_Name__c = 'Test Name '+ i, LastName__c = 'LastName' + i, Sex__c = 'Male',Class_object__c = classRecord.Id);
+            Student__c studentData = new Student__c(First_Name__c = 'Test Name '+ i, LastName__c = 'LastName' + i, 
+                                                    Sex__c = 'Male',Class_object__c = classRecord.Id);
             studentList.add(studentData);
         }
         insert studentList;        
