@@ -1,7 +1,8 @@
 @IsTest
 public class UpdateOfOpportunityTest {
 	
-    @IsTest static void testOpportunityUpdateManagerField(){
+    @IsTest 
+    static void testOpportunityUpdateManagerField_COntactId_RelatedManager(){
         // Given
         List<Contact> contactList = TestFactoryDataForAccountAndContact.createAccountsWithContacts(1,1);
         Opportunity opp = new Opportunity(Name='Opportunity Test',StageName='Prospecting',CloseDate=System.today().addMonths(1));
