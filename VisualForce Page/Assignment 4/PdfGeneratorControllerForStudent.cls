@@ -1,8 +1,8 @@
 public class PdfGeneratorControllerForStudent {
-
-    public Id studentId ='a002x000003TKTXAA4';
-        //ApexPages.currentPage().getparameters().get('id');
-    
+	public Id studentId;
+    public PdfGeneratorControllerForStudent(ApexPages.StandardController controller){
+        studentId = apexpages.currentpage().getparameters().get('id');
+    }    	
     	public PageReference saveStudentPDF(){
         PageReference pdf = Page.GenerateStudentDetailsPDF;
         pdf.getParameters().put('id',studentId);
@@ -15,7 +15,7 @@ public class PdfGeneratorControllerForStudent {
             body = Blob.valueOf('Error');
         }
         attach.Body = body;
-        attach.Name = 'StudentPdf.pdf';
+        attach.Name = 'StudentPdfId'+studentId + '.pdf';
         attach.ParentId = studentId;
         attach.IsPrivate = false;
         
