@@ -8,16 +8,16 @@ public class ManageClassController {
     }
     
     public List<Class__c> getClasses(){
-        return [Select Name,Board__c,ClassTeacher__r.Name,MaxSize__c,NoOfStudents__c,MyCount__c from class__c];
+        return [SELECT Name,Board__c,ClassTeacher__r.Name,MaxSize__c,NoOfStudents__c,MyCount__c FROM class__c];
     }
     
     public void EditClass(){
-        SelectedClass = [Select Name,Board__c,ClassTeacher__r.Name,MaxSize__c,NoOfStudents__c,MyCount__c from class__c where id =: ClassId];
+        SelectedClass = [SELECT Name,Board__c,ClassTeacher__r.Name,MaxSize__c,NoOfStudents__c,MyCount__c FROM class__c WHERE Id =: ClassId];
         render = true;
     }
     
     public void DeleteClass(){
-        SelectedClass = [Select Name,Board__c,ClassTeacher__r.Name,MaxSize__c,NoOfStudents__c,MyCount__c from class__c where id =: ClassId];
+        SelectedClass = [SELECT Name,Board__c,ClassTeacher__r.Name,MaxSize__c,NoOfStudents__c,MyCount__c FROM class__c WHERE Id =: ClassId];
 		render = false;
         delete SelectedClass;
     }
