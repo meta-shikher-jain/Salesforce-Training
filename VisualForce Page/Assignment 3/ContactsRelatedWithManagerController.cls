@@ -1,13 +1,13 @@
 public class ContactsRelatedWithManagerController {
 
-    public Id oppId{get;set;}
-    public List<Contact> contactList{get;set;}
-    public string contactRecord{get;set;}
+    public Id oppId{get; set;}
+    public List<Contact> contactList{get; set;}
+    public string contactRecord{get; set;}
     
     public List<SelectOption> getRelatedContacts(){
        	List<SelectOption> option = new List<SelectOption>();
 		oppId =	apexpages.currentpage().getparameters().get('id');
-        contactList = [Select Id,Name From Contact Where AccountId in (Select Manager__c from opportunity where id=:oppId)] ;  
+        contactList = [SELECT Id,Name FROM Contact WHERE AccountId in (SELECT Manager__c FROM opportunity where Id=:oppId)] ;  
             
        for(Contact cont : contactList){
             option.add(new SelectOption(cont.Id,cont.Name));
