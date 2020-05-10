@@ -18,7 +18,6 @@ public class ClassIdWithStudentMapTest {
                Student__c student = new Student__c(LastName__c = cls.Name + 'St' + j, Class_object__c = cls.Id);
                studentList.add(student);
            }
-
        }
        insert studentList;
        //When
