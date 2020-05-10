@@ -40,7 +40,7 @@
     }
     
     @IsTest
-    static void testFromClosedLostToProposal/Price Quote_CloseDateRemainsSame(){
+    static void testFromClosedLostToProposal_PriceQuote_CloseDateRemainsSame(){
         //Given
         Opportunity opp = new Opportunity(Name='Opportunity Test',StageName='Closed Lost',CloseDate=System.today().addMonths(1));
         insert opp;
