@@ -1,14 +1,6 @@
 <apex:page controller="AccountSearchControllers" >
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Search Account</title>
-        <!-- Import the Design System style sheet -->
-        <apex:slds />
-    </head>
-    <body>
         <apex:form >
-            <apex:pageblock >
+            <apex:pageblock title = "Search Account" >
                 <apex:pageBlockButtons location="top">
                     <apex:commandButton value="Search" action="{!SearchAccountRec}"/>
                 </apex:pageBlockButtons>
@@ -38,15 +30,14 @@
                         <apex:column value="{!item.BillingCountry}"/>
                     </apex:pageBlockTable>
                 </apex:pageBlock>
-                <apex:pageBlock rendered="{!If(accounts.size==0 && isResultDisplay == true,true,false)}" title="Search Result">            
+                <apex:pageBlock rendered="{!If(accounts.size==0 && isResultDisplay,true,false)}" title="Search Result">            
                     <apex:outputLabel value="No Result Found"></apex:outputLabel>           
                 </apex:pageBlock>
                 <apex:outputText >Page {!(setCon.pageNumber)} of {! CEILING(ResultSize / setCon.pageSize) }</apex:outputText>
-                <apex:commandButton rendered="{!setCon.hasPrevious}" value="first" action="{!setCon.first}"/>
+                <apex:commandButton rendered="{!setCon.hasPrevious}" value="First" action="{!setCon.first}"/>
                 <apex:commandButton rendered="{!setCon.hasPrevious}" value="Previous" action="{!setCon.previous}"/>
-                <apex:commandButton rendered="{!setCon.hasNext}" value="next" action="{!setCon.next}"/>
-                <apex:commandButton rendered="{!setCon.hasNext}" value="last" action="{!setCon.last}"/>
+                <apex:commandButton rendered="{!setCon.hasNext}" value="Next" action="{!setCon.next}"/>
+                <apex:commandButton rendered="{!setCon.hasNext}" value="Last" action="{!setCon.last}"/>
             </apex:pageblock>
         </apex:form>
-    </body>
 </apex:page>
