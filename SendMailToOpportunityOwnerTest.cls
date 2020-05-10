@@ -12,12 +12,12 @@ public class SendMailToOpportunityOwnerTest {
     }
     
     @IsTest
-    static void testEmailSchedulerLastDateNotModifiedFromLastThirtyDays(){
+    static void testEmailSchedulerLastDateNotModifiedFromLastThirtyDays_OpportunityCountIsFive(){
         String CRON_EXP = '0 2 23 04 05 ? 2020';
-	Test.startTest();
+		Test.startTest();
         // When
         System.schedule('ScheduledApexTest', CRON_EXP,new SendMailToOpportunityOwnerSchedular());   
-        Test.StopTest();
+        Test.stopTest();
         // Then
         System.assertEquals(5,[SELECT Count() FROM Opportunity]);
     }
