@@ -2,8 +2,8 @@
 public class ClassIdWithStudentMapTest {
 
     @isTest
-   	static void testClassIdinMapWithStudent() {
-       
+   	static void testClassId_TwoStudentInTwoClass_NumberOfStudentsTwo() {
+       //Given
        Map<Class__c, Set<Id>> expected = new Map<Class__c, Set<Id>>();
        List<Class__c> classList = new List<Class__c>();
        List<Student__c> studentList = new List<Student__c>();
@@ -21,7 +21,7 @@ public class ClassIdWithStudentMapTest {
 
        }
        insert studentList;
-   
+       //When
        for(Class__c cls : classList) {
            Set<Id> studentIds = new Set<Id>();
            for(Student__c student : studentList ) {
@@ -32,6 +32,7 @@ public class ClassIdWithStudentMapTest {
            expected.put(cls,studentIds);
        }
        Map<Class__c,Set<Id>> result = Utility.StudentIdWithNames();
+       //Then
        System.assertEquals(result.keyset().size(),2);
    }
 }
