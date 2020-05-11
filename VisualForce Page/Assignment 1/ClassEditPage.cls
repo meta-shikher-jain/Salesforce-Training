@@ -1,6 +1,6 @@
 <apex:page standardController="Class__c">
    <apex:form >
-       <apex:pageBlock title="Detail" mode="edit">
+       <apex:pageBlock title="Class Detail" mode="edit">
 	   <apex:pageBlockSection showHeader="false" columns="2">
                        <apex:inputField value="{!Class__c.Name}"/>
                        <apex:inputField value="{!Class__c.MaxSize__c}"/>
