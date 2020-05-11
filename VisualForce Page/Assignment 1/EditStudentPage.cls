@@ -1,6 +1,6 @@
 <apex:page standardController="Student__c">
    <apex:form >
-       <apex:pageBlock title="Detail" mode="edit">
+       <apex:pageBlock title="Student Detail" mode="edit">
 <apex:pageBlockSection showHeader="false" columns="2">
                    <apex:inputField value="{!Student__c.Class_object__c}"/>
                    <apex:inputField value="{!Student__c.DOB__c}"/>
