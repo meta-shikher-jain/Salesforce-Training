@@ -15,8 +15,9 @@ public class NotAllowToDeleteClassTest {
         //When
         insert studentList;
         try{
-            test.startTest();
+            Test.startTest();
             Database.delete(classRecord);
+            Test.stopTest();
         }
         catch(DmlException ex){
             //Then
