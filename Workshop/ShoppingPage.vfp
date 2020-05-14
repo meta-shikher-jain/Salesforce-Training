@@ -1,0 +1,90 @@
+<apex:page Controller="ShoppingCartController">
+    <apex:form >
+   		
+        <div>
+            <apex:outputText rendered="{!noHistory}" value="{!historyNotAvailable}"></apex:outputText>
+        </div>
+		<apex:pageblock title="My Purchase Orders" id="History" rendered="{!historyPage}" >
+        	<apex:pageBlockTable value="{!historyDisplay}" var="hist">
+                <apex:column headerValue="Id" value="{!hist.purchaseId}"/>
+                <apex:column headerValue="Order Price" value="{!hist.orderPrice}"/>
+                <apex:column headerValue="Order Status" value="{!hist.orderStatus}"/>
+        	</apex:pageBlockTable>
+        	<apex:commandButton value="First" rerender="History" action="{!first}" disabled="{!prev}"/>
+			<apex:commandButton value="Previous" rerender="History" action="{!previous}" disabled="{!prev}"/>
+        	<apex:commandButton value="Next" rerender="History" action="{!next}" disabled="{!nxt}"/>
+        	<apex:commandButton value="Last" rerender="History" action="{!last}" disabled="{!nxt}"/>
+            Page: <apex:outputText value=" {!pageNumberOfHistotry} of {!noOfHistoryPages}"/>
+    	</apex:pageblock>
+        <div style="text-align: center">
+           	<apex:commandButton value="Add New Purchase" action="{!findProduct}" rendered="{!addProduct}"/>  
+        </div>
+		<div>
+            <apex:outputText rendered="{!noProduct}" value="{!productNotAvailable}"></apex:outputText>
+       	</div>
+    	<apex:pageBlock title="Products" rendered="{!productPage}" id="productList">
+        	<apex:outputLabel value="Select Products" />
+        		<apex:inputText value="{!itemToBeSearch}" />
+        	<apex:commandButton value="Search" action="{!findProduct}" />
+        	 <div style="text-align: right">
+        	   	<apex:commandButton value="Add Product To Cart" action="{!showCart}" />
+        	</div>
+        	<apex:pageBlockTable value="{!searchedProduct}" var="product">   
+            	<apex:column headerValue="Select">
+      				<apex:inputCheckbox value="{!product.isSelected}" />
+      			</apex:column>
+                <apex:column headerValue="Product Name" value="{!product.productName}" />
+                <apex:column headerValue="Product Code" value="{!product.productCode}" />
+                <apex:column headerValue="Description" value="{!product.description}" />
+                <apex:column headerValue="Price Per Unit" value="{!product.price}" />
+                <apex:column headerValue="Quantity Available" value="{!product.quantity}" />
+         	</apex:pageBlockTable>
+        		<apex:commandButton value="First" rerender="productList" action="{!first2}" disabled="{!prev2}"/>
+				<apex:commandButton value="Previous" rerender="productList" action="{!previous2}" disabled="{!prev2}"/>
+        		<apex:commandButton value="Next" rerender="productList" action="{!next2}" disabled="{!nxt2}"/>
+        		<apex:commandButton value="Last" rerender="productList" action="{!last2}" disabled="{!nxt2}"/>
+            	Page: <apex:outputText value=" {!pageNumberOfProduct} of {!noOfProductPages}"/>
+    	</apex:pageBlock>
+        
+    	 <apex:pageBlock title="Cart Items" rendered="{!showCart}" id="Cart" >
+        	<apex:pageBlockTable value="{!cartItems}" var="item"> 
+                <apex:column headerValue="Product Name" value="{!item.productName}" />
+                <apex:column headerValue="Product Code" value="{!item.productCode}" />
+                <apex:column headerValue="Price Per Unit" value="{!item.price}" />
+                <apex:column headerValue="Quantity">
+                    <apex:inputText value="{!item.quantity}"/>
+                </apex:column> 
+                <apex:column headerValue="Delete Item">
+                    <apex:commandButton value="Delete" action="{!searchProduct}" reRender="Cart,productList"> 
+    				 	 <apex:param name="productId" assignTo="{!productId}" value="{!item.productId}"/> 
+					</apex:commandButton>
+				</apex:column>
+            </apex:pageBlockTable>
+            <div style="text-align: center">
+             	<apex:commandButton value="Checkout"  action="{!validation}" />
+        	</div>
+             <div>
+                 <apex:outputText rendered="{!check}" value="{!Error}"></apex:outputText>
+             </div>
+    	 </apex:pageBlock>  
+        
+    	 <apex:pageBlock rendered="{!showFinalCart}">
+             <div align="right">
+               	 Order Date:<apex:outputText value="{!purchaseDate}"/>
+             </div>
+        	<apex:pageBlockTable value="{!cartItems}" var="item">   
+                <apex:column headerValue="Product Name" value="{!item.productName}" />
+                <apex:column headerValue="Product Code" value="{!item.productCode}" />
+                <apex:column headerValue="Quantity" value="{!item.quantity}" />
+                <apex:column headerValue="Price Per Unit" value="{!item.price}" />
+                <apex:column headerValue="Total" value="{!item.total}" />
+            </apex:pageBlockTable><br/>
+             <div align="right">
+                 Total:<apex:outputText value="{!total}" />
+             </div>
+         <div style="text-align:center" >
+           	<apex:commandButton value="Place Order" action="{!placeOrder}" />
+         </div>
+         </apex:pageBlock> 
+    </apex:form>
+</apex:page>
