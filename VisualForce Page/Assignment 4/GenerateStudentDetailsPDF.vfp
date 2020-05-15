@@ -1,5 +1,5 @@
 <apex:page standardController="Student__c" renderAs="Pdf">
-    <apex:form >
+    <apex:form>
     	<apex:pageBlock title="Student Details">
         	<apex:pageBlockSection >
             	<apex:outputText value="{!Student__c.Name}"></apex:outputText>
