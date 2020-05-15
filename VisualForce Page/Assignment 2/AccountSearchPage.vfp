@@ -1,10 +1,10 @@
 <apex:page controller="AccountSearchControllers" >
-        <apex:form >
-            <apex:pageblock title = "Search Account" >
+        <apex:form>
+            <apex:pageblock title = "Search Account">
                 <apex:pageBlockButtons location="top">
                     <apex:commandButton value="Search" action="{!SearchAccountRec}"/>
                 </apex:pageBlockButtons>
-                <apex:pageBlockSection >
+                <apex:pageBlockSection>
                     <apex:pageBlockSectionItem >
                         <apex:outputLabel value="BillingCity" />
                         <apex:inputText value="{!BillingCity}" />
@@ -14,12 +14,12 @@
                         <apex:inputText value="{!numOfRecords}" />
                     </apex:pageBlockSectionItem>
                     <apex:pageBlockSectionItem >
-                        <apex:outputLabel value="BillingState" />
-                        <apex:inputText value="{!BillingState}" />
+                        <apex:outputLabel value="BillingState"/>
+                        <apex:inputText value="{!BillingState}"/>
                     </apex:pageBlockSectionItem>
                     <apex:pageBlockSectionItem >
-                        <apex:outputLabel value="BillingCountry" />
-                        <apex:inputText value="{!BillingCountry}" />
+                        <apex:outputLabel value="BillingCountry"/>
+                        <apex:inputText value="{!BillingCountry}"/>
                     </apex:pageBlockSectionItem>
                 </apex:pageBlockSection>
                 <apex:pageBlock rendered="{!If(accounts.size > 0,true,false)}" title="Search Results">
