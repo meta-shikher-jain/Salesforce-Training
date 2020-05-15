@@ -1,7 +1,7 @@
 public class PdfGeneratorControllerForStudent {
 	public Id studentId;
-    public PdfGeneratorControllerForStudent(ApexPages.StandardController controller){
-        studentId = apexpages.currentpage().getparameters().get('id');
+    	public PdfGeneratorControllerForStudent(ApexPages.StandardController controller){
+        	studentId = apexpages.currentpage().getparameters().get('id');
     }    	
     	public PageReference saveStudentPDF(){
         PageReference pdf = Page.GenerateStudentDetailsPDF;
