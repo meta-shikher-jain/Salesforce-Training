@@ -1,5 +1,5 @@
-<apex:page standardController="Student__c" >
-       <apex:form >
+<apex:page standardController="Student__c">
+       <apex:form>
            <apex:pageBlock title="New Student">
                <apex:pageBlockSection >
                    <apex:inputField value="{!Student__c.Class_object__c}"/>
@@ -12,8 +12,8 @@
                    <apex:inputField value="{!Student__c.Spouse_Name__c}"/>
                    <apex:inputField value="{!Student__c.Name}"/>
                </apex:pageBlockSection>
-            <apex:pageBlockButtons >
-                   <apex:commandButton value="Save" action="{!save}" />
+            <apex:pageBlockButtons>
+                   <apex:commandButton value="Save" action="{!save}"/>
                </apex:pageBlockButtons>
            </apex:pageBlock>
        </apex:form>
