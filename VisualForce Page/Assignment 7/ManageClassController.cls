@@ -1,7 +1,7 @@
 public class ManageClassController {
-    public Id ClassId {get;set;}
-    public Class__c SelectedClass{get;set;}
-    public boolean render{set;get;}
+    public Id ClassId {get; set;}
+    public Class__c SelectedClass{get; set;}
+    public boolean render{get; set;}
     
     public ManageClassController(){
         render = false;
@@ -18,7 +18,7 @@ public class ManageClassController {
     
     public void DeleteClass(){
         SelectedClass = [SELECT Name,Board__c,ClassTeacher__r.Name,MaxSize__c,NoOfStudents__c,MyCount__c FROM class__c WHERE Id =: ClassId];
-		render = false;
+	render = false;
         delete SelectedClass;
     }
     
