@@ -1,20 +1,20 @@
 <apex:page controller="ManageClassController" >
-    <apex:form >
+    <apex:form>
     	<apex:pageBlock title="Class Details" id="classList">
         	<apex:pageBlockTable value="{!Classes}" var="class">
             	<apex:column value="{!class.Name}"/>
                 <apex:column value="{!class.Board__c}"/>
                 <apex:column value="{!class.NoOfStudents__c}"/>
-                <apex:column value="{!class.MaxSize__c}" />
-                <apex:column value="{!class.MyCount__c }" />
+                <apex:column value="{!class.MaxSize__c}"/>
+                <apex:column value="{!class.MyCount__c }"/>
                 <apex:column>
                         <apex:commandLink value="Edit" action="{!EditClass}" reRender="EditClassList">
-                            <apex:param name="ClassId" assignTo="{!ClassId}" value="{!class.Id}" />
+                            <apex:param name="ClassId" assignTo="{!ClassId}" value="{!class.Id}"/>
                         </apex:commandLink>
                 </apex:column>
                 <apex:column>
                     <apex:commandLink value="Delete" action="{!DeleteClass}" reRender="classList">
-                    	<apex:param name="ClassId" assignTo="{!ClassId}" value="{!class.Id}" />
+                    	<apex:param name="ClassId" assignTo="{!ClassId}" value="{!class.Id}"/>
                     </apex:commandLink>
                 </apex:column>
           </apex:pageBlockTable>
