@@ -1,7 +1,7 @@
 <apex:page Controller="ContactsRelatedWithManagerController">
-        <apex:form >
+        <apex:form>
             <apex:pageBlock rendered="{!If(RelatedContacts.size > 0,true,false)}" title="Contacts Related To Bill to Contact Account Id">
-                <apex:pageBlockSection >
+                <apex:pageBlockSection>
                     <apex:selectRadio value="{!contactRecord}">
                         <apex:selectOptions value="{!RelatedContacts}" ></apex:selectOptions>
                     </apex:selectRadio>
