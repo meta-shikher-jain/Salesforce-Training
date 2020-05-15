@@ -1,7 +1,6 @@
 public with sharing class JSONGeneratorController {
 
-    public string jsonStr {get;private set;}
-    
+    public string jsonStr {get; private set;}
     public JSONGeneratorController(){
         jsonStr = prepareJSON();
     }
