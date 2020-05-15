@@ -1,0 +1,36 @@
+<apex:page showHeader="false" sidebar="false" controller="DeleteStudentController">
+   
+   <script src="/soap/ajax/48.0/connection.js" type="text/javascript"></script>
+   
+   <script type="text/javascript">
+       Visualforce.remoting.timeout = 120000;
+       let urlParams = new URLSearchParams(window.location.search);
+       
+    function deleteStudents() {
+           sforce.connection.sessionId = '{! $API.Session_Id }';
+           let studentIds = urlParams.get('ids').split(',');
+           let recordIds = [];
+           for (Id of studentIds) {
+               recordIds.push(Id);
+           }
+           let result = sforce.connection.deleteIds(recordIds);
+           Visualforce.remoting.Manager.invokeAction(
+               '{!$RemoteAction.DeleteStudentController.DeleteStudents}',
+               result,
+               handleResult
+           );   
+      }     
+    function handleResult(){
+       returnToPreviousPage();
+     }    
+           
+     
+   function returnToPreviousPage(){
+       window.location.replace(urlParams.get('retURL'));
+   }
+   </script>
+   <apex:pageBlock title="Delete Students">
+       <button onclick="deleteStudents()">Continue</button>
+       <button onclick="returnToPreviousPage()">Cancel</button>
+   </apex:pageBlock>
+</apex:page>
