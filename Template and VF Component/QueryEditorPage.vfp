@@ -1,0 +1,15 @@
+<apex:page controller="QueryEditorPageController">
+    <apex:pageBlock title="Query Editor" id="Page">
+        <apex:form >
+            <apex:pageBlockSection >
+                <apex:outputPanel layout="block" id="form">
+                    <apex:inputTextarea value="{!query}" id="query"/>
+                    <apex:commandButton value="Execute" action="{!executeQuery}"/>
+                </apex:outputPanel>
+            </apex:pageBlockSection>
+        </apex:form>
+    </apex:pageBlock>
+    <apex:form id="table" rendered="{!checkQuery}">
+    	<c:QueryEditor soqlQuery="{!query}"/>
+    </apex:form>
+</apex:page>
