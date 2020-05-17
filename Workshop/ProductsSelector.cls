@@ -23,10 +23,6 @@ public class ProductsSelector extends fflib_SObjectSelector {
     }
     
     public Integer getNoOfProductRecords(){
-       /* String query = String.format(
-    			'SELECT COUNT() FROM {0} ',
-   				new List<String> { getSObjectName() }
-    			);*/
         String query = 'SELECT COUNT() FROM' +' '+ getSObjectName();
         Integer NoOfProductRecords = Database.countQuery(query);
    	 	return NoOfProductRecords;
