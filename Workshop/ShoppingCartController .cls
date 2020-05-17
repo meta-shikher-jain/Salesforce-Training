@@ -1,77 +1,73 @@
 public class ShoppingCartController {
+   	public static final Integer LIMIT_SIZE = 10;
     
+    public List<ProductWrapper> availableProduct {get; set;}
+    public List<ProductWrapper> cartItems {get; set;}
+    public List<PurchaseHistoryWrapper> historyDisplay {get; set;}
     public List<Purchase__c> listOfpurchase {get; set;}
     public List<PurchaseHistoryWrapper> listOfPurchaseHistory {get; set;}
-    public List<PurchaseHistoryWrapper> historyDisplay {get; set;}
-    Purchase__c newRecord {get; set;}
-    
     public List<Product2> listOfAvailableProduct {get; set;}
     public List<ProductWrapper> listOfProduct {get; set;}
-    public List<ProductWrapper> availableProduct {get; set;}
     public List<ProductWrapper> searchedProduct {get; set;}
-    public List<ProductWrapper> cartItems {get; set;}
     
-    public Boolean productPage {get; set;}
+    public Boolean addProduct {get; set;}
+    public Boolean check {get; set;}
     public Boolean historyPage {get; set;}
+    public Boolean noProduct {get; set;}
+    public Boolean noHistory {get; set;}
+    public Boolean productPage {get; set;}
     public Boolean showCart {get; set;}
     public Boolean showFinalCart {get; set;}
-    public Boolean check {get; set;}
-    public Boolean addProduct {get; set;}
-   	public Boolean noProduct {get; set;}
-    public Boolean noHistory {get; set;}
     
+    public String error{get; set;}
     public String historyNotAvailable{get; set;}
-    public String productNotAvailable{get; set;}
     public String itemToBeSearch {get; set;}
+    public String productNotAvailable{get; set;}
     public String productId {get; set;}
+    public String purchaseDate{get; set;}
     public String[] status = new String[]{'Error : Quantity is too high','Error : Invalid entry of Quantity',
         										'Attention : No History Records','Attention : No Products to buy','Pending'};
-    public String error{get; set;}
-    
-    public Integer noOfHistoryRecords = 0;
-    public Integer noOfProductRecords = 0;
-    public Integer offsetSize {get; set;}
-    public Integer offset2 {get; set;}
-	public Integer limitSize= 10;  
-    public Integer pageNumberOfHistotry{get; set;}
-    public Integer noOfHistoryPages{get; set;}
-    public Integer pageNumberOfProduct{get; set;}
-    public Integer noOfProductPages{get; set;}
     
     public Decimal total {get; set;}
-    public String purchaseDate{get; set;}
+    public Integer noOfHistoryRecords = 0;
+    public Integer noOfProductRecords = 0;
+    public Integer noOfHistoryPages{get; set;}
+    public Integer noOfProductPages{get; set;}
+    public Integer offsetSize {get; set;}
+    public Integer offset2 {get; set;}  
+    public Integer pageNumberOfHistotry{get; set;}
+    public Integer pageNumberOfProduct{get; set;}
+    
     /*Constructor of ShoppingController Class
 */
     public ShoppingCartController() {
-        productId = null;
-        productPage = False;
-        showCart = False;
-        showFinalCart = False;
+        addProduct = true;
         check = false;
+        historyPage = true;
+        itemToBeSearch = null;
+        noHistory = false;
+        noProduct = false;
         offsetSize = 0;
         offset2 = 0;
-        addProduct = True;
-        itemToBeSearch = null;
+        productId = null;
+        productPage = false;
         PurchaseHistorySelector purchaseRecords = new PurchaseHistorySelector();
         ProductsSelector productRecords = new ProductsSelector();
-        noOfHistoryRecords = purchaseRecords.getNoOfHistoryRecords();
-        noOfProductRecords = productRecords.getNoOfProductRecords();
-        historyPage = True;
-        noHistory = False;
-        noProduct = False;
         purchaseDate = date.today().format();
+        showCart = false;
+        showFinalCart = false;
+		noOfHistoryRecords = purchaseRecords.getNoOfHistoryRecords();
+        noOfProductRecords = productRecords.getNoOfProductRecords();
         
         if(noOfHistoryRecords == 0){
-            noHistory = True;
-            historyPage = False;
+            noHistory = true;
+            historyPage = false;
             historyNotAvailable = status[2];
         }
         
         noOfHistoryPages = noOfHistoryRecords/10 + 1;
-        
         listOfpurchase = new List<Purchase__c>();
         listOfpurchase = purchaseRecords.selectAllProduct();
-       
         listOfPurchaseHistory = new List<PurchaseHistoryWrapper>();
         
         for (Purchase__c previousPurchase : listOfpurchase) {
@@ -103,7 +99,7 @@ public class ShoppingCartController {
         for (Integer i = offsetSize; ( i < offsetSize + 10 && i < noOfHistoryRecords); i++ ){
             historyDisplay.add(listOfPurchaseHistory[i]);   
         }
-        pageNumberOfHistotry = OffsetSize/LimitSize + 1;
+        pageNumberOfHistotry = OffsetSize/LIMIT_SIZE + 1;
     }
        
     /*Wrapper Class for getting Purchase_History__c data
@@ -123,14 +119,15 @@ public class ShoppingCartController {
     /*Wrapper Class for getting Product2 data
 */
     public Class ProductWrapper {
+        public String description {get; set;}
         public String productId {get; set;}
         public String productName {get; set;}
         public String productCode {get; set;}
-        public String description {get; set;}
-        public Decimal quantity {get; set;}
         public Decimal price {get; set;}
-        public Boolean isSelected {get; set;}
+        public Decimal quantity {get; set;}
         public Decimal total {get; set;}
+        public Boolean isSelected {get; set;}
+        
         
         public ProductWrapper (String productId, String productName, String productCode, String description, 
                                         Decimal quantity, Decimal price) {
@@ -196,12 +193,12 @@ public class ShoppingCartController {
             }
         }
         
-        if (math.mod(availableProduct.size(),LimitSize) == 0)
-        	noOfProductPages = availableProduct.size()/LimitSize;
+        if (math.mod(availableProduct.size(),LIMIT_SIZE) == 0)
+        	noOfProductPages = availableProduct.size()/LIMIT_SIZE;
         else
-            noOfProductPages = availableProduct.size()/LimitSize + 1;
+            noOfProductPages = availableProduct.size()/LIMIT_SIZE + 1;
         
-        pageNumberOfProduct = offset2/LimitSize +1;
+        pageNumberOfProduct = offset2/LIMIT_SIZE +1;
         
         if(productId != null){
             showCart();
@@ -211,13 +208,13 @@ public class ShoppingCartController {
     /*Function to shot the item in Cart
 */
     public void showCart() {
-        check = False;
-        showCart = True;
+        check = false;
+        showCart = true;
         cartItems = new List<ProductWrapper>();
         
         for (ProductWrapper product : listOfProduct) {
      
-            if (product.isSelected == True && product.quantity != 0) {
+            if (product.isSelected == true && product.quantity != 0) {
                 cartItems.add(new ProductWrapper(product.productId, product.productName, product.productCode, 
                                                           product.description, 1, product.price));
             }
@@ -228,24 +225,24 @@ public class ShoppingCartController {
         }
         productId = null;
         if(cartItems.size() == 0){
-            showCart = False;
+            showCart = false;
         }
 	}   
     
     public void validation(){
-        check = False;
-        showFinalCart = False;
+        check = false;
+        showFinalCart = false;
         try{
             for (ProductWrapper item : cartItems) {
                 if(item.quantity < 1){
                     error = status[1];
-                    check = True;
+                    check = true;
                     break;
                 }
             	for (ProductWrapper product : listOfProduct) {
                 	if (product.productId == item.productId) {
                     	if (product.quantity < item.quantity) {
-                        	check = True;
+                        	check = true;
                         	error = status[0];
                     	}
                 	}
@@ -253,18 +250,15 @@ public class ShoppingCartController {
         	}
         }catch(Exception e){
             error = status[1];
-            check = True;
+            check = true;
             System.debug(Error);
         }
         
-        if(check == False){
+        if(check == false){
             itemsInCart();
         }
     }
-    
-    
-    /*Function to show the final cart page
-*/
+
     public void itemsInCart() {
         showFinalCart = True;
                 
@@ -296,19 +290,11 @@ public class ShoppingCartController {
         	}
         }
         update updatedlist;
-        
         Purchase__c newRecord = new Purchase__c ( Price__c = total, Order_Status__c = status[4]);
         insert newRecord;
         offsetSize = 0;
        
 		listOfAvailableProduct = DmlDataClass.getAvailableProduct();
-        
-        /*for (Product2 product : listOfAvailableProduct){
-        	for (ProductWrapper item : cartItems) {
-                if(String.valueOf(product.Id).equals(item.productId))
-        		PurchaseDetail__c newDetail = new PurchaseDetail__c(Product__c = product.Id, Purchase_History__c = newRecord.ID, Quantity__c = item.quantity);
-        	}
-        }*/
         getHistory();  
     }
     
@@ -322,7 +308,7 @@ public class ShoppingCartController {
     /*Function to select Previous Page
 */
     public void previous() {
-		OffsetSize = OffsetSize - LimitSize;
+		OffsetSize = OffsetSize - LIMIT_SIZE;
         getHistory(); 
         
 	}
@@ -330,14 +316,12 @@ public class ShoppingCartController {
     /*Function to select Next Page
 */
     public void next() {
-		OffsetSize = OffsetSize + LimitSize;
+		OffsetSize = OffsetSize + LIMIT_SIZE;
         getHistory(); 
 	}
     
-    /*Function to select Last Page
-*/
     public void last() {
-		OffsetSize = noOfHistoryRecords - math.mod(noOfHistoryRecords,LimitSize);
+		OffsetSize = noOfHistoryRecords - math.mod(noOfHistoryRecords,LIMIT_SIZE);
         getHistory(); 
 	}
 	
@@ -353,7 +337,7 @@ public class ShoppingCartController {
     /*Function to check if next is available or not
 */
     public boolean getnxt() {
-		if ((OffsetSize + LimitSize) > noOfHistoryRecords)
+		if ((OffsetSize + LIMIT_SIZE) > noOfHistoryRecords)
 			return true;
 		else
 			return false;
@@ -369,21 +353,21 @@ public class ShoppingCartController {
     /*Function to select Previous Page
 */
     public void previous2() {
-		Offset2 = Offset2 - LimitSize;
+		Offset2 = Offset2 - LIMIT_SIZE;
         searchProduct();
 	}
     
     /*Function to select Next Page
 */
     public void next2() {
-		Offset2 = Offset2 + LimitSize;
+		Offset2 = Offset2 + LIMIT_SIZE;
         searchProduct();
 	}
     
     /*Function to select Last Page
 */
     public void last2() {
-		Offset2 = noOfProductRecords - math.mod(noOfProductRecords,LimitSize);
+		Offset2 = noOfProductRecords - math.mod(noOfProductRecords,LIMIT_SIZE);
         searchProduct(); 
 	}
 	
@@ -401,7 +385,7 @@ public class ShoppingCartController {
     /*Function to check if next is available or not
 */
     public boolean getnxt2() {
-        if ((Offset2 + LimitSize) > searchedProduct.size()){
+        if ((Offset2 + LIMIT_SIZE) > searchedProduct.size()){
 			return true;
         }
         else{
