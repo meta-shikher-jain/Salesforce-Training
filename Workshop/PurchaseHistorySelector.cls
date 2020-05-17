@@ -16,16 +16,12 @@ public class PurchaseHistorySelector extends fflib_SObjectSelector {
     
     public  List<Purchase__c> selectAllProduct(){
         fflib_QueryFactory query = newQueryFactory();
-		return (List<Purchase__c>) Database.query( query.toSOQL() );
+	return (List<Purchase__c>) Database.query( query.toSOQL() );
     }
 	
     public Integer getNoOfHistoryRecords(){
-       /* String query = String.format(
-    			'SELECT COUNT() FROM {0} ',
-   				new List<String> { getSObjectName() }
-    			);*/
         String query = 'SELECT COUNT() FROM' +' '+ getSObjectName();
         Integer NoOfHistoryRecords = Database.countQuery(query);
-   	 	return NoOfHistoryRecords;
+   	return NoOfHistoryRecords;
     }
 }
