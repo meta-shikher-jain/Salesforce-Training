@@ -1,0 +1,4 @@
+In the given code the SOQL query is used in loop which is not feasible , because SOQL query executes according to loop 
+which may exceeds governor limits for SOQL query .
+Also in the given code the DML statement is also used in loop which is also not feasible we have to try to use it once
+, so i have optimised the code and used the SOQL once and also use Update DML operation once on the updated list of contacts.
