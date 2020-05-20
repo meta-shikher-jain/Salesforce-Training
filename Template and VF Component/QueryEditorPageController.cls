@@ -3,9 +3,9 @@ public class QueryEditorPageController {
     public Boolean checkQuery {get; set;}
     
     public QueryEditorPageController() {
-        checkQuery = False;
+        checkQuery = false;
     }
     public void executeQuery() {
-        checkQuery = True;
+        checkQuery = true;
     }
 }
