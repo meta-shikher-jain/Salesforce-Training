@@ -3,11 +3,11 @@ public class QueryEditorController {
     public Integer resultSize {get; set;}
     public String dbQuery {get; set;}
     public List<String> ListOfFields {get; set;}
-    Integer numberOfColumns {get; set;}
+    public Integer numberOfColumns {get; set;}
     public String sortDirection = 'ASC';
     public String sortExpBy {get; set;}
     public Boolean checkSort {get;set;}
-    Integer size;
+    public Integer size;
     
     /*Construction for initillization
 */
