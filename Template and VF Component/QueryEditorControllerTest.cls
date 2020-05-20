@@ -2,7 +2,7 @@
 public class QueryEditorControllerTest {
 
     @isTest
-    static void TestNoOfFieldsInQuery(){
+    static void TestNoOfFieldsInQuery_dbQuery_FourFields(){
         //Given
         Class__c cls = new Class__c(Name = 'English');
         insert cls;
@@ -21,7 +21,7 @@ public class QueryEditorControllerTest {
     }
     
     @isTest
-    static void TestQueryResultsSize(){
+    static void TestQueryResultsSize_SizeOfResultIsTwo(){
         List<Student__c> studentList = new List<Student__C>();
         //Given
         Class__c cls = new Class__c(Name = 'English');
@@ -44,7 +44,7 @@ public class QueryEditorControllerTest {
     }
     
     @isTest
-    static void TestresultQuery(){
+    static void TestStudentNameInDbQuery(){
         //Given
         Class__c cls = new Class__c(Name = 'English');
         insert cls;
@@ -57,7 +57,6 @@ public class QueryEditorControllerTest {
         custom.dbQuery = dbQuery;
         custom.con = null ;
         List<Student__c> actual = custom.getListOfSobject();
-        system.debug(actual);
         Test.stopTest();
         //Then
         System.assertEquals('Shikher',actual[0].Name);
