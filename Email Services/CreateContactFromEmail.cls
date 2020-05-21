@@ -7,16 +7,13 @@ global class CreateContactFromEmail implements Messaging.InboundEmailHandler {
                 String myPlainText= '';
                 myPlainText = email.plainTextBody;
                 List<Contact> contactList = new List<Contact>();
-                if(email.textAttachments != null)
-                {
-                    for (Messaging.Inboundemail.TextAttachment tAttachment : email.textAttachments) {
+                for (Messaging.Inboundemail.TextAttachment tAttachment : email.textAttachments) {
                         String xmlString = Blob.valueOf(tAttachment.body).toString();
                         for(Contact contactRecord : getContactList(xmlString))
                         {
                             contactList.add(contactRecord);
                         }
-                    }
-                }
+                 }
                 insert ContactList;
                 result.success = true;
             }
