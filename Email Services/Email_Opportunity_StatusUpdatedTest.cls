@@ -14,6 +14,6 @@ private class Email_Opportunity_StatusUpdatedTest
         Integer invocations = Limits.getEmailInvocations();
         Test.StopTest();
         //Then
-        System.assertEquals(2, invocations, 'An email has not been sent');
+        System.assertEquals(2, invocations, 'Expected count is 2 and actual is ' + invocations);
     }
 }
