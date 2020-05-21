@@ -1,0 +1,33 @@
+<apex:component controller="QueryEditorController">
+    <apex:attribute name="soqlQuery" description="The Query to be executed."
+                    type="String" required="true" assignTo="{!dbQuery}"/>
+      	
+    <apex:pageBlock title="Result" id="blockTitle">
+        <apex:pageMessages id="showmsg"/>
+        <apex:pageBlockTable value="{!ListOfSobject}" var="record" id="table" rendered="{!NOT(ListOfSobject.empty)}">
+            <apex:repeat value="{!ListOfFields}" var="field">
+                <apex:column value="{!record[field]}">
+                    <apex:facet name="header">   
+           				<apex:commandLink action="{!sortData}" value="{!field}" reRender="table,blockTitle,showmsg">
+                            <apex:param value="{!field}" name="col" assignTo="{!sortExpBy}"/>
+           				</apex:commandLink>
+         			</apex:facet>
+                </apex:column>
+            </apex:repeat>
+        </apex:pageBlockTable>
+		<apex:pageBlockSection rendered="{!NOT(ListOfSobject.empty)}">
+        	<apex:outputLabel value="Page :">
+            	<apex:outputText value="{!(con.pageNumber)} of {! CEILING(resultSize / con.pageSize) }"/>
+    		</apex:outputLabel>
+    	</apex:pageBlockSection>
+    	<apex:commandButton rendered="{!con.hasPrevious}" value="first" action="{!con.first}"/>
+        <apex:commandButton rendered="{!con.hasPrevious}" value="Previous" action="{!con.previous}"/>
+        <apex:commandButton rendered="{!con.hasNext}" value="next" action="{!con.next}"/>
+        <apex:commandButton rendered="{!con.hasNext}" value="last" action="{!con.last}"/>
+    </apex:pageBlock> 
+    
+    <apex:pageBlock rendered="{!ListOfSobject.empty}">
+        <apex:outputLabel value=" No Result Found">
+        </apex:outputLabel>
+    </apex:pageBlock>
+</apex:component>
