@@ -4,8 +4,7 @@ public class EmailToOpportunityOwner {
     {
         List<Messaging.SingleEmailMessage> allmsg = new List<Messaging.SingleEmailMessage>();
         EmailTemplate emailTemplateRecord = [SELECT Id FROM EmailTemplate WHERE DeveloperName LIKE 'OpportunityUpdateEmailTemplate' LIMIT 1]; 
-        List<Opportunity> opportunityList = [SELECT Id,Name,Owner.Email FROM Opportunity Where Id in:emailopportunityList];
-        for(Opportunity opportunityRecord: opportunityList)
+        for(Opportunity opportunityRecord: emailopportunityList)
         {
             Messaging.SingleEmailMessage mail = Messaging.renderStoredEmailTemplate(emailTemplateRecord.Id, opportunityRecord.OwnerId, opportunityRecord.Id);
             mail.setToAddresses(new List<String>{opportunityRecord.Owner.Email});
